@@ -1,0 +1,73 @@
+<!-- 4.Student Registration Form
+Requirements:
+•	Full Name, Email, Phone, Course Selection
+•	Dropdown for selecting a course
+•	Validation for required fields -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+</head>
+<style>
+     *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        padding: 20px;
+    }
+       form label{
+       
+        font-size: 22px;
+    }
+    form input{
+        height: 25px;
+        width: 600px;
+        font-size: 20px;
+    }
+    form select {
+        height: 25px;
+        width: 200px;
+        font-size: 18px;
+    }
+    #submit{
+        height: 45px;
+        width: 100px;
+        border-radius: 10px;
+        padding-top: 5px;
+        background-color: blue;
+        color:white;
+         margin-left:200px;
+        font-size: 22px;
+       
+    }
+</style>
+<body>
+    <h1>Student Registration Form</h1>
+    <form action="">
+        <label for="name">Student Name: </label>
+        <input type="text" id="name" name="stud_name" required>
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="stud_email" required>
+        <label for="phone">Phone Number: </label>
+        <input type="tel" pattern="[0-9]{10}" maxlength="10" id="phone" name="stud_phone" required>
+        <label for="course">Course Selection: </label>
+        <select name="stud_course" id="course" required>
+            <option value="">Select</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="JS">JavaScript</option>
+        <option value="python">Python</option>
+        <option value="django">Django</option>
+        </select>
+<button id="submit" type="submit">Submit</button>
+
+    </form>
+</body>
+</html>

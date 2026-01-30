@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Scrollbar Test</title>
+<style>
+.scrollable {
+    height: 300px;
+    overflow-y: scroll;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+/* Webkit scrollbar */
+.scrollable::-webkit-scrollbar {
+    width: 20px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: yellow;
+    border-radius: 10px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+    min-height: 50px;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+    background: orange;
+}
+
+/* Firefox */
+.scrollable {
+    scrollbar-width: thin;
+    scrollbar-color: red yellow;
+}
+</style>
+</head>
+<body>
+<h1>Custom Scrollbar Test</h1>
+<div class="scrollable">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+    <p>More content...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+    <p>Keep scrolling...</p>
+</div>
+</body>
+</html>

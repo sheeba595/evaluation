@@ -1,0 +1,127 @@
+<!-- 2.Personal Portfolio Website
+Requirements:
+•	Include an About Me section
+•	Add Projects, Skills, and Contact Form
+•	Use semantic HTML for better SEO
+•	Make it mobile-friendly with proper structure -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio website</title>
+</head>
+<style>
+      *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+    h1{
+        text-align: center;
+    }
+    main{
+        padding: 20px;
+        margin: auto;
+        height: 930px;
+        width: 800px;
+        background-color: bisque;
+        line-height: 2;
+        
+    }
+    main p{
+        font-size: 20px;
+    }
+    ul {
+        list-style-type: square;
+        font-size: 20px;
+        padding: 20px;
+    }
+    .contact form{
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+    }
+      .contact form label{
+        font-size: 20px;
+      }
+    .contact form input{
+        height: 25px;
+        width: 650px;
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+    .contact form textarea{
+        height: 25px;
+        width: 650px;
+        border-radius: 10px;;
+    }
+    .contact form button{
+        height: 45px;
+        width: 100px;
+        border-radius: 10px;
+        padding-top: 5px;
+        background-color: blue;
+        color:white;
+        margin: auto;
+        font-size: 22px;
+       
+    }
+    footer{
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        height: 35px;
+        width: 800px;
+        margin: auto;
+        
+    }
+</style>
+<body>
+    <h1>Personal Portfolio Website</h1>
+    <main>
+        <section class="about">
+            <h2>About Me</h2>
+            <p>Hi🙋‍♂️, Myself Sheeba an aspiring FullStack Developer gaining hands-on experience in logics, designing and connecting.
+                Glad to catch up!
+            </p>
+        </section>
+        <section class="projects">
+            <h2>Projects</h2>
+            <ul>
+                <li>AI Based Online Quiz Platform - HTML, CSS, JS ,Python</li>
+                
+            </ul>
+        </section>
+        <section class="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JS</li>
+                <li>Python</li>
+                <li>Java</li>
+            </ul>
+        </section>
+        <section class="contact">
+            <h2>Contact</h2>
+            <form action="">
+                <label for="name">Name: </label>
+                <input type="text" id="name" name="user_name" required>
+                <label for="email">Email: </label>
+                <input type="email" id="email" name="user_email" required>
+                <label for="message">Message: </label>
+                <textarea name="user_msg" id="message"></textarea>
+                <button type="submit">Submit</button>
+            </form>
+
+
+        </section>
+    </main>
+    <footer>
+<p>&copy;SHEEBA C | ALL RIGHTS RESERVED @2025</p>
+    </footer>
+</body>
+</html>

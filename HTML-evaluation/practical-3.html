@@ -1,0 +1,124 @@
+<!-- 3.Online Quiz Application
+Requirements:
+•	Display multiple-choice questions
+•	Allow users to select an answer
+•	Show results after submission
+•	Use radio buttons for answer selection -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz Application</title>
+</head>
+<style>
+     *{
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+    }
+    form{
+        padding: 20px;
+    }
+    fieldset{
+        
+        line-height: 2;
+    }
+    form input{
+       font-size: 20px;
+    }
+    legend{
+        font-style: normal ;
+        font-weight: 600;
+font-size: 22px;
+    }
+    form label{
+        font-size: 22px;
+    }
+    #submit{
+        height: 45px;
+        width: 100px;
+        border-radius: 10px;
+        padding-top: 5px;
+        background-color: blue;
+        color:white;
+        margin: auto;
+        font-size: 22px;
+        margin-top: 10px;
+        margin-left: 100px;
+    }
+</style>
+<body>
+    <h1>Online Quiz Application</h1>
+     <form action="">
+    <fieldset>
+        <legend>What does HTML stands for?</legend>
+       
+            <input type="radio" id="q1a" name="qns-1" value="HyperText" required>
+            <label for="q1a">HyperText Markup Language</label>
+            <input type="radio" id="q1b" name="qns-1" value="Home ">
+            <label for="q1b">Home Tool Marked Language</label>
+            <input type="radio" id="q1c" name="qns-1" value="HyperLinks ">
+            <label for="q1c">HyperLinks and Text Markup Language</label>
+            
+         
+    </fieldset>
+    <fieldset>
+        <legend>Which HTML tag is used to create a hyperlink?</legend>
+         <input type="radio" id="q2a" name="qns-2" value="link" required>
+            <label for="q2a">link tag</label>
+         <input type="radio" id="q2b" name="qns-2" value="anchor" >
+            <label for="q2b">anchor tag</label>
+            <input type="radio" id="q2c" name="qns-2" value="href ">
+            <label for="q2c">href tag</label>
+    </fieldset>
+    <fieldset>
+        <legend>Which CSS property is used to change text color?</legend>
+        <input type="radio" id="q3a" name="qns-3" value="font-color" required>
+        <label for="q3a">font-color</label>
+        <input type="radio" id="q3b" name="qns-3" value="color">
+        <label for="q3b">color</label>
+        <input type="radio" id="q3c" name="qns-3" value="text-color">
+        <label for="q3c">text-color</label>
+    </fieldset>
+    <fieldset>
+        <legend>Which JavaScript keyword is used to declare a variable?</legend>
+        <input type="radio" id="q4a" name="qns-4" value="var" required>
+        <label for="q4a">var</label>
+        <input type="radio" id="q4b" name="qns-4" value="let">
+        <label for="q4b">let</label>
+        <input type="radio" id="q4c" name="qns-4" value="all">
+        <label for="q4c">All of the above</label>
+
+    </fieldset>
+    <button id="submit" type="submit">Submit</button>
+    <p id="result"></p>
+    </form>
+    <script>
+        
+        const result=document.getElementById("result");
+       const submit=document.getElementById("submit");
+       submit.addEventListener("click",(event)=>{
+        event.preventDefault();
+        let score=0;
+        if(document.querySelector('input[name="qns-1"]:checked').value==="HyperText")
+        {
+            score+=1;
+        }
+         if(document.querySelector('input[name="qns-2"]:checked').value==="anchor")
+        {
+            score+=1;
+        }
+         if(document.querySelector('input[name="qns-3"]:checked').value==="color")
+        {
+            score+=1;
+        }
+         if(document.querySelector('input[name="qns-4"]:checked').value==="all")
+        {
+            score+=1;
+        }
+         result.textContent=`Your score is ${score}/4`;
+       })
+    </script>
+</body>
+</html>

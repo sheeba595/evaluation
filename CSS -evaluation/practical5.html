@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax Scrolling</title>
+<style>
+body, html {
+    margin: 0;
+    height: 100%;
+}
+.parallax {
+    background-image: url('https://picsum.photos/1200/800');  
+    height: 500px;
+    background-attachment: fixed;  
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content {
+    height: 500px;
+    text-align: center;
+    font-size: 30px;
+    padding: 200px 0;
+    background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+
+<div class="parallax"></div>
+<div class="content">Scroll to see parallax effect</div>
+<div class="parallax"></div>
+<div class="content">More content</div>
+
+</body>
+</html>
