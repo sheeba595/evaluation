@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wishlist</title>
+<style>
+  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+  h1 { text-align: center; }
+  .wishlist { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+  .item { display: flex; justify-content: space-between; margin-bottom: 15px; }
+  button { padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; background: #e74c3c; color: white; }
+  a { display: block; margin: 10px 0; text-align:center; }
+</style>
+</head>
+<body>
+
+<h1>My Wishlist</h1>
+
+<a href="./practical-8.html">Back to Products</a>
+
+<div class="wishlist" id="wishlistItems"></div>
+
+<script>
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function displayWishlist() {
+  const wishlistDiv = document.getElementById("wishlistItems");
+  wishlistDiv.innerHTML = "";
+  if (wishlist.length === 0) {
+    wishlistDiv.innerHTML = "<p>Your wishlist is empty.</p>";
+    return;
+  }
+
+  wishlist.forEach(item => {
+    wishlistDiv.innerHTML += `
+      <div class="item">
+        <span>${item.name} - ₹${item.price}</span>
+        <button onclick="removeFromWishlist(${item.id})">Remove</button>
+      </div>
+    `;
+  });
+}
+
+function removeFromWishlist(id) {
+  wishlist = wishlist.filter(item => item.id !== id);
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  displayWishlist();
+}
+
+displayWishlist();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Products Page</title>
+<style>
+  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+  h1 { text-align: center; }
+  .products { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+  .product { display: flex; justify-content: space-between; margin-bottom: 15px; }
+  button { padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; background: #3d85ff; color: white; }
+  .wishlist-btn { background: #e67e22; margin-left: 5px; }
+  a { display: block; margin: 10px 0; text-align:center; }
+</style>
+</head>
+<body>
+
+<h1>Products</h1>
+
+<a href="./wishlist.html">Go to Wishlist</a>
+
+<div class="products" id="productList"></div>
+
+<script>
+const products = [
+  { id: 1, name: "Headphones", price: 1500 },
+  { id: 2, name: "Smart Watch", price: 2500 },
+  { id: 3, name: "Bluetooth Speaker", price: 2000 }
+];
+
+ let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function displayProducts() {
+  const productList = document.getElementById("productList");
+  productList.innerHTML = "";
+  products.forEach(product => {
+    productList.innerHTML += `
+      <div class="product">
+        <span>${product.name} - ₹${product.price}</span>
+        <div>
+          <button onclick="addToWishlist(${product.id})" class="wishlist-btn">Add to Wishlist</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function addToWishlist(id) {
+  const product = products.find(p => p.id === id);
+  if (!wishlist.find(p => p.id === id)) {
+    wishlist.push(product);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    alert(product.name + " added to Wishlist!");
+  } else {
+    alert(product.name + " is already in Wishlist!");
+  }
+}
+
+displayProducts();
+</script>
+
+</body>
+</html>

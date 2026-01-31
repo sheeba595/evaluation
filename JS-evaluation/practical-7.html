@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Rating System</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .products {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .product {
+    margin-bottom: 20px;
+  }
+
+  .product-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .stars {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .stars span {
+    font-size: 25px;
+    color: #ccc;
+  }
+
+  .stars span.hover,
+  .stars span.selected {
+    color: gold;
+  }
+
+  .average-rating {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<h1>⭐ Product Rating System</h1>
+
+<div class="products" id="productList"></div>
+
+<script>
+  const products = [
+    { name: "Headphones", ratings: [] },
+    { name: "Smart Watch", ratings: [] },
+    { name: "Bluetooth Speaker", ratings: [] },
+  ];
+
+  function displayProducts() {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    products.forEach((product, index) => {
+      const avg = calculateAverage(product.ratings);
+      productList.innerHTML += `
+        <div class="product" data-index="${index}">
+          <div class="product-name">${product.name}</div>
+          <div class="stars">
+            <span data-star="1">&#9733;</span>
+            <span data-star="2">&#9733;</span>
+            <span data-star="3">&#9733;</span>
+            <span data-star="4">&#9733;</span>
+            <span data-star="5">&#9733;</span>
+          </div>
+          <div class="average-rating">Average rating: ${avg.toFixed(1)} / 5 (${product.ratings.length} reviews)</div>
+        </div>
+      `;
+    });
+
+    setupStarEvents();
+  }
+
+  function calculateAverage(ratings) {
+    if (ratings.length === 0) return 0;
+    const sum = ratings.reduce((a, b) => a + b, 0);
+    return sum / ratings.length;
+  }
+
+  function setupStarEvents() {
+    const productsDivs = document.querySelectorAll(".product");
+
+    productsDivs.forEach(productDiv => {
+      const stars = productDiv.querySelectorAll(".stars span");
+      const productIndex = productDiv.dataset.index;
+
+      stars.forEach(star => {
+   
+        star.addEventListener("mouseover", () => {
+          const starValue = Number(star.dataset.star);
+          stars.forEach(s => {
+            s.classList.toggle("hover", Number(s.dataset.star) <= starValue);
+          });
+        });
+
+        star.addEventListener("mouseout", () => {
+          stars.forEach(s => s.classList.remove("hover"));
+          updateSelectedStars(productIndex, stars);
+        });
+
+        star.addEventListener("click", () => {
+          const rating = Number(star.dataset.star);
+          products[productIndex].ratings.push(rating);
+          updateSelectedStars(productIndex, stars);
+          displayProducts(); 
+        });
+      });
+
+      updateSelectedStars(productIndex, stars);
+    });
+  }
+
+  function updateSelectedStars(productIndex, stars) {
+    const ratings = products[productIndex].ratings;
+    const lastRating = ratings[ratings.length - 1] || 0;
+
+    stars.forEach(s => {
+      s.classList.toggle("selected", Number(s.dataset.star) <= lastRating);
+    });
+  }
+
+   displayProducts();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .products, .cart {
+      background: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 650px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .product, .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 6px 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background: #3d85ff;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .qty-btn {
+      padding: 3px 8px;
+      margin: 0 5px;
+    }
+
+    .remove-btn {
+      background: #e74c3c;
+      margin-left: 10px;
+    }
+
+    .total {
+      text-align: right;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🛒 Shopping Cart</h1>
+
+<div class="products">
+  <h2>Products</h2>
+
+  <div class="product">
+    <span>Headphones - ₹1500</span>
+    <button onclick="addToCart('Headphones', 1500)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <span>Smart Watch - ₹2500</span>
+    <button onclick="addToCart('Smart Watch', 2500)">Add to Cart</button>
+  </div>
+
+  <div class="product">
+    <span>Bluetooth Speaker - ₹2000</span>
+    <button onclick="addToCart('Speaker', 2000)">Add to Cart</button>
+  </div>
+</div>
+
+<div class="cart">
+  <h2>Cart</h2>
+  <div id="cartItems"></div>
+  <div class="total">Total: ₹<span id="totalPrice">0</span></div>
+</div>
+
+<script>
+  let cart = [];
+
+  function addToCart(name, price) {
+    let item = cart.find(p => p.name === name);
+
+    if (item) {
+      item.quantity++;
+    } else {
+      cart.push({ name, price, quantity: 1 });
+    }
+
+    renderCart();
+  }
+
+  function changeQty(name, change) {
+    let item = cart.find(p => p.name === name);
+    item.quantity += change;
+
+    if (item.quantity <= 0) {
+      removeItem(name);
+    }
+
+    renderCart();
+  }
+
+  function removeItem(name) {
+    cart = cart.filter(item => item.name !== name);
+    renderCart();
+  }
+
+  function renderCart() {
+    let cartItems = document.getElementById("cartItems");
+    let totalPrice = document.getElementById("totalPrice");
+
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+
+      cartItems.innerHTML += `
+        <div class="cart-item">
+          <span>${item.name} (₹${item.price})</span>
+          <div>
+            <button class="qty-btn" onclick="changeQty('${item.name}', -1)">−</button>
+            ${item.quantity}
+            <button class="qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+            <button class="remove-btn" onclick="removeItem('${item.name}')">Remove</button>
+          </div>
+        </div>
+      `;
+    });
+
+    totalPrice.textContent = total;
+  }
+</script>
+
+</body>
+</html>

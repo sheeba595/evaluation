@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Class Calendar</title>
+<style>
+  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+  h1 { text-align: center; margin-bottom: 20px; }
+  .calendar { max-width: 700px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .header button { padding: 5px 10px; border: none; border-radius: 4px; background: #3d85ff; color: white; cursor: pointer; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { width: 14.28%; text-align: center; padding: 10px; border: 1px solid #ddd; cursor: pointer; }
+  td.event-lecture { background: #b3e5fc; }
+  td.event-exam { background: #ffcdd2; }
+  td.event-office { background: #dcedc8; }
+  td:hover { background: #f0f0f0; }
+  #eventDetails { max-width: 700px; margin: 20px auto; background: #fff; padding: 15px; border-radius: 8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body>
+
+<h1>📅 Class Schedule Calendar</h1>
+
+<div class="calendar">
+  <div class="header">
+    <button onclick="prevMonth()">« Prev</button>
+    <div id="monthYear"></div>
+    <button onclick="nextMonth()">Next »</button>
+  </div>
+  <table id="calendarTable">
+    <thead>
+      <tr>
+        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+      </tr>
+    </thead>
+    <tbody id="calendarBody"></tbody>
+  </table>
+</div>
+
+<div id="eventDetails">
+  <h3>Event Details</h3>
+  <div id="detailsContent">Click a date to see class/event details</div>
+</div>
+
+<script>
+let currentDate = new Date();
+
+const events = {
+  '2026-02-05': { type: 'lecture', title: 'Math Lecture 10:00AM - 11:00AM' },
+  '2026-02-08': { type: 'exam', title: 'Physics Midterm Exam 2:00PM - 4:00PM' },
+  '2026-02-12': { type: 'office', title: 'CS Office Hours 1:00PM - 3:00PM' },
+  '2026-02-18': { type: 'lecture', title: 'Chemistry Lecture 9:00AM - 10:00AM' },
+  '2026-02-22': { type: 'exam', title: 'Math Quiz 11:00AM - 11:30AM' },
+};
+
+function renderCalendar() {
+  const month = currentDate.getMonth();
+  const year = currentDate.getFullYear();
+  const monthYear = document.getElementById("monthYear");
+  monthYear.textContent = currentDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const calendarBody = document.getElementById("calendarBody");
+  calendarBody.innerHTML = "";
+  let row = document.createElement("tr");
+  let cell, date = 1;
+
+  for (let i = 0; i < 6; i++) { // 6 weeks max
+    row = document.createElement("tr");
+    for (let j = 0; j < 7; j++) {
+      cell = document.createElement("td");
+      if (i === 0 && j < firstDay) {
+        cell.innerHTML = "";
+      } else if (date > daysInMonth) {
+        cell.innerHTML = "";
+      } else {
+        cell.innerHTML = date;
+        const fullDate = `${year}-${String(month+1).padStart(2,'0')}-${String(date).padStart(2,'0')}`;
+        if (events[fullDate]) {
+          cell.classList.add(`event-${events[fullDate].type}`);
+        }
+        cell.addEventListener('click', () => showEventDetails(fullDate));
+        date++;
+      }
+      row.appendChild(cell);
+    }
+    calendarBody.appendChild(row);
+  }
+}
+
+function showEventDetails(date) {
+  const detailsDiv = document.getElementById("detailsContent");
+  if (events[date]) {
+    const event = events[date];
+    detailsDiv.innerHTML = `<strong>${date}:</strong> ${event.title} <br> Type: ${event.type}`;
+  } else {
+    detailsDiv.textContent = `No events scheduled on ${date}`;
+  }
+}
+
+function prevMonth() {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+}
+
+function nextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+}
+
+renderCalendar();
+</script>
+
+</body>
+</html>

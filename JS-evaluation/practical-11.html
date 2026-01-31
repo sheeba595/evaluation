@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Language Toggle Example</title>
+<style>
+  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+  h1 { text-align: center; }
+  .lang-buttons { text-align: center; margin-bottom: 20px; }
+  .lang-buttons button { margin: 0 5px; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; background: #3d85ff; color: white; }
+</style>
+</head>
+<body>
+
+<div class="lang-buttons">
+  <button onclick="setLanguage('en')">English</button>
+  <button onclick="setLanguage('es')">Spanish</button>
+  <button onclick="setLanguage('fr')">French</button>
+</div>
+
+<h1 id="title">Welcome to Our Shop</h1>
+<p id="intro">Browse our products and enjoy your shopping experience!</p>
+<button id="shopBtn">Shop Now</button>
+
+<script>
+  const translations = {
+    en: {
+      title: "Welcome to Our Shop",
+      intro: "Browse our products and enjoy your shopping experience!",
+      shopBtn: "Shop Now"
+    },
+    es: {
+      title: "Bienvenido a Nuestra Tienda",
+      intro: "¡Explora nuestros productos y disfruta de tu experiencia de compra!",
+      shopBtn: "Comprar Ahora"
+    },
+    fr: {
+      title: "Bienvenue dans Notre Boutique",
+      intro: "Parcourez nos produits et profitez de votre expérience d'achat !",
+      shopBtn: "Acheter Maintenant"
+    }
+  };
+
+  function setLanguage(lang) {
+    document.getElementById("title").textContent = translations[lang].title;
+    document.getElementById("intro").textContent = translations[lang].intro;
+    document.getElementById("shopBtn").textContent = translations[lang].shopBtn;
+  }
+
+  setLanguage('en');
+</script>
+
+</body>
+</html>

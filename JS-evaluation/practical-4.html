@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Price Filter</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .filter, .products {
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .filter input {
+    padding: 6px;
+    width: 120px;
+    margin-right: 10px;
+  }
+
+  button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #3d85ff;
+    color: white;
+  }
+
+  .product {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🔍 Product Filter by Price</h1>
+
+<div class="filter">
+  <input type="number" id="minPrice" placeholder="Min Price">
+  <input type="number" id="maxPrice" placeholder="Max Price">
+  <button onclick="filterProducts()">Filter</button>
+</div>
+
+<div class="products" id="productList"></div>
+
+<script>
+  const products = [
+    { name: "Headphones", price: 1500 },
+    { name: "Smart Watch", price: 2500 },
+    { name: "Bluetooth Speaker", price: 2000 },
+    { name: "Laptop Bag", price: 1200 },
+    { name: "Wireless Mouse", price: 800 }
+  ];
+
+  function displayProducts(productArray) {
+    const productList = document.getElementById("productList");
+    productList.innerHTML = "";
+
+    productArray.forEach(product => {
+      productList.innerHTML += `
+        <div class="product">
+          <span>${product.name}</span>
+          <span>₹${product.price}</span>
+        </div>
+      `;
+    });
+  }
+
+  function filterProducts() {
+    const min = Number(document.getElementById("minPrice").value) || 0;
+    const max = Number(document.getElementById("maxPrice").value) || Infinity;
+
+    const filtered = products.filter(product =>
+      product.price >= min && product.price <= max
+    );
+
+    displayProducts(filtered);
+  }
+
+   displayProducts(products);
+</script>
+
+</body>
+</html>
