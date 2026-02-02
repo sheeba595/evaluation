@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order Summary</title>
+<style>
+  body { font-family: Arial; background: #f4f4f4; padding: 20px; }
+  h1 { text-align: center; }
+  .summary { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+  .section { margin-bottom: 20px; }
+  .section h2 { margin-bottom: 10px; }
+  p { margin: 5px 0; }
+</style>
+</head>
+<body>
+
+<h1>Order Summary</h1>
+
+<div class="summary" id="orderSummary"></div>
+
+<script>
+   const order = JSON.parse(localStorage.getItem("lastOrder"));
+
+  const summaryDiv = document.getElementById("orderSummary");
+
+  if (!order) {
+    summaryDiv.innerHTML = "<p>No order found.</p>";
+  } else {
+    let html = "";
+
+     html += '<div class="section"><h2>Products</h2>';
+    let total = 0;
+    order.cart.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      html += `<p>${item.name} x ${item.quantity} = ₹${itemTotal}</p>`;
+      total += itemTotal;
+    });
+    html += `<p><strong>Total: ₹${total}</strong></p></div>`;
+
+     html += '<div class="section"><h2>Shipping Info</h2>';
+    const ship = order.shipping;
+    html += `<p>Name: ${ship.name}</p>`;
+    html += `<p>Address: ${ship.address}, ${ship.city} - ${ship.zip}</p></div>`;
+
+     html += '<div class="section"><h2>Payment Info</h2>';
+    const pay = order.payment;
+    html += `<p>Method: ${pay.method}</p>`;
+    html += `<p>Card ending: **** **** **** ${pay.last4}</p></div>`;
+
+    summaryDiv.innerHTML = html;
+  }
+</script>
+
+</body>
+</html>
